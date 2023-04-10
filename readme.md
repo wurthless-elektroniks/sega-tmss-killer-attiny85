@@ -61,7 +61,7 @@ Since /CART_CE will be strobed at least once in this code block, we can take adv
 
 ## Theory of operation
 
-The ATTiny85 checks if /CART is pulled low and will stop execution if it isn't (the FAIL light blinks forever). Otherwise, it sets up INT0 to fire on the falling edge of /CART_CE, and begins the "glitch loop". In the glitch loop, /VRES is pulled hard to ground via the transistors, resetting the 68000 to a predictable state. The code then waits for INT0 to fire; if it doesn't within a certain amount of time, it will retry several times before giving up (the FAIL light stays on).
+The ATTiny85 checks if /CART is pulled low and will stop execution if it isn't (the FAIL light blinks forever). Otherwise, it sets up INT0 to fire on the falling edge of /CART_CE, and begins the "glitch loop". In the glitch loop, /VRES is pulled hard to ground via the transistor, resetting the 68000 to a predictable state. The code then waits for INT0 to fire; if it doesn't within a certain amount of time, it will retry several times before giving up (the FAIL light stays on).
 
 As soon as INT0 fires, /VRES is driven low, then the program halts in a "success" state (SUCCESS light stays on). At this point, the glitch should have succeeded, and the Genesis should boot directly into the game.
 
@@ -71,7 +71,7 @@ The NPN transistor involved in this design exists because I had spent too much t
 
 ## Known improvements
 
-* The transistors could both be removed in favor of simply having the ATTiny85 pulling /VRES low on its own. I tried this, but it didn't seem to work.
+* The transistor could be removed in favor of simply having the ATTiny85 pulling /VRES low on its own. I tried this, but it didn't seem to work.
 * The ATTiny85 is overpowered, overspecced, and overpriced for what this mod involves. This code could and should be ported to a cheaper AVR chip, or converted to some other cheap microcontroller.
 
 ## Acknowledgements
