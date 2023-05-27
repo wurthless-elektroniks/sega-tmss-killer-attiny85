@@ -30,6 +30,7 @@ This method of disabling TMSS is nothing new. It has been tried before with succ
 
 ### Tested working
 
+* PAL Mega Drive VA6 
 * USA Genesis 2 VA 1.8
 
 ### Not tested
@@ -57,13 +58,13 @@ The relevant code that enables and disables the cartridge (from [here](https://w
     loc_302:
     		bclr	#0, (a3)	| Disable cart and enable TMSS rom
 
-Since /CART_CE will be strobed at least once in this code block, we can take advantage of this.
+The weakness with how TMSS is implemented, however, is that the value of $A14101 persists between soft resets. So, if we reset the 68000 in the short period of time where the cartridge is enabled, then the TMSS will stay locked out and the Genesis will boot the game directly.
 
 ## Theory of operation
 
 The ATTiny85 checks if /CART is pulled low and will stop execution if it isn't (the FAIL light blinks forever). Otherwise, it sets up INT0 to fire on the falling edge of /CART_CE, and begins the "glitch loop". In the glitch loop, /VRES is pulled hard to ground via the transistor, resetting the 68000 to a predictable state. The code then waits for INT0 to fire; if it doesn't within a certain amount of time, it will retry several times before giving up (the FAIL light stays on).
 
-As soon as INT0 fires, /VRES is driven low, then the program halts in a "success" state (SUCCESS light stays on). At this point, the glitch should have succeeded, and the Genesis should boot directly into the game.
+As soon as /CART_CE falls, INT0 fires, /VRES is pulsed, then the program halts in a "success" state (SUCCESS light stays on). At this point, the glitch should have succeeded, and the Genesis should boot directly into the game.
 
 ## Why the transistor?
 
