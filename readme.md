@@ -6,7 +6,7 @@ This method of disabling TMSS is nothing new. It has been tried before with succ
 
 ## Stuff needed
 
-* Sega Genesis with TMSS (Model 2 works)
+* Sega Genesis with TMSS
 * ATTiny85-20P
 * An NPN transistor (I was lazy)
 * Optionally, two LEDs and a 220 ohm resistor
@@ -20,22 +20,33 @@ This method of disabling TMSS is nothing new. It has been tried before with succ
 
 ## Assembly and installation
 
+Installation is fairly straightforward:
+
 * ATTiny pin 5 to /CART_IN (cart connector pin B32)
 * ATTiny pin 6 to transistor base
 * /VRES (cart connector pin B27) to transistor collector
 * Transistor emitter to GND
 * ATTiny pin 7 to /CART_CE (cart connector pin B17)
+* ATTiny pin 4 to GND
+* ATTiny pin 8 to VCC
+
+Optionally:
+* ATTiny pin 2 to the "FAIL" status LED
+* ATTiny pin 3 to the "SUCCESS" status LED
 
 ## Compatibility
 
-### Tested working
+This should work with all TMSS consoles. TMSS is present on Genesis and Mega Drive systems from Model 1 hardware revision VA6 onwards. (All Model 2 and Model 3 systems have TMSS as standard.)
 
-* PAL Mega Drive VA6 
+### Tested, confirmed working
+
+* PAL Mega Drive VA6
 * USA Genesis 2 VA 1.8
 
-### Not tested
+### Untested, but probably working
 
-* Literally everything else
+* Sega CD: Since the Sega CD only boots when no cartridge is inserted, this mod will not interfere with the Sega CD boot process.
+* Sega Power Base Converter/SMS compatibility mode: In SMS compatibility mode /VRES is pulled low by the I/O chip at all times, which prevents the 68000 from running. This mod only pulls /VRES low, which should not interfere with SMS mode operation, but I can't confirm this yet.
 
 ### Not compatible
 
@@ -43,7 +54,9 @@ This method of disabling TMSS is nothing new. It has been tried before with succ
 
 ## How TMSS works
 
-Upon coming out of reset the TMSS ROM is mapped in place of the cartridge. The 68000 will initialize the hardware, copy code to RAM, and jump to it. It will enable the cartridge, read what it needs to read, and then disable the cartridge. If the TMSS ROM sees the 'SEGA' string in the ROM header, it displays "PRODUCED BY OR UNDER LICENSE FROM SEGA ENTERPRISES LTD", then jumps to the game. Otherwise, the 68000 will halt execution.
+The Genesis I/O chip controls the initial system state based on the /CART and /M3 pins of the cartridge connector. If /CART is high, the system tries to boot from the expansion connector. If /CART is low but /M3 is also low, the system boots in SMS compatibility mode. Otherwise, the system assumes that a cartridge is present, and the 68000 is released from reset with the TMSS ROM mapped in memory by the I/O chip.
+
+The 68000 executes the TMSS ROM, which performs basic hardware initialization and then copies code to RAM. The stub code in RAM briefly enables the cartridge to check if 'SEGA' is present at $100. If so, it displays "PRODUCED BY OR UNDER LICENSE FROM SEGA ENTERPRISES LTD", then enables the cartridge permanently and jumps to the game. Otherwise, the TMSS code puts the Genesis into an infinite loop.
 
 The relevant code that enables and disables the cartridge (from [here](https://wiki.megadrive.org/index.php?title=TMSS)):
 
@@ -58,7 +71,7 @@ The relevant code that enables and disables the cartridge (from [here](https://w
     loc_302:
     		bclr	#0, (a3)	| Disable cart and enable TMSS rom
 
-The weakness with how TMSS is implemented, however, is that the value of $A14101 persists between soft resets. So, if we reset the 68000 in the short period of time where the cartridge is enabled, then the TMSS will stay locked out and the Genesis will boot the game directly.
+The weakness with how TMSS is implemented, however, is that the value of $A14101 persists between soft resets. So, if we reset the 68000 in the short period of time where the cartridge is enabled, then  TMSS will stay locked out and the Genesis will boot the game directly.
 
 ## Theory of operation
 
