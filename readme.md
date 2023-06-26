@@ -1,4 +1,4 @@
-# World's Worst Sega TMSS Disabler in an ATTiny85
+# World's Worst Sega TMSS Disabler in an ATTinyX5
 
 This project will disable the TMSS screen on a Sega Genesis. It was designed as a stupid weekend project and is not really something you can use commercially, although it does work. It is meant to be easy to install, and easy to uninstall. No trace cuts are required.
 
@@ -7,7 +7,7 @@ This method of disabling TMSS is nothing new. It has been tried before with succ
 ## Stuff needed
 
 * Sega Genesis with TMSS
-* ATTiny85-20P
+* An ATTinyX5 MCU (I use ATTiny85-20P or ATTiny25-20P)
 * An NPN transistor (I was lazy)
 * Optionally, two LEDs and a 220 ohm resistor
 * Soldery shit
@@ -40,13 +40,18 @@ This should work with all TMSS consoles. TMSS is present on Genesis and Mega Dri
 
 ### Tested, confirmed working
 
-* PAL Mega Drive VA6
-* USA Genesis 2 VA 1.8
+* 315-5433-based consoles (tested: Model 1 VA6)
+* 315-5660-based consoles (tested: Model 2 VA1.8)
 
 ### Untested, but probably working
 
 * Sega CD: Since the Sega CD only boots when no cartridge is inserted, this mod will not interfere with the Sega CD boot process.
 * Sega Power Base Converter/SMS compatibility mode: In SMS compatibility mode /VRES is pulled low by the I/O chip at all times, which prevents the 68000 from running. This mod only pulls /VRES low, which should not interfere with SMS mode operation, but I can't confirm this yet.
+
+### Untested, don't know if it would work
+
+* One-chip consoles, particularly later Model 2s and all Model 3s: There might be protection against something externally pulling /VRES low. I don't have a Model 3 on hand to test.
+* Sega Nomad
 
 ### Not compatible
 
