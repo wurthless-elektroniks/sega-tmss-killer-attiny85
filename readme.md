@@ -15,7 +15,10 @@ This method of disabling TMSS is nothing new. It has been tried before with succ
 ## To build and flash the source
 
 * Assemble with avra
-* Use avrdude params -U lfuse:w:0xF1:m -U hfuse:w:0xDF:m -U efuse:w:0xFF:m
+* Set fuses as follows:
+  * For avrdude, use params -U lfuse:w:0xF1:m -U hfuse:w:0xDF:m -U efuse:w:0xFF:m
+  * For Xgpro, see here (https://github.com/wurthless-elektroniks/sega-tmss-killer-attiny85/issues/1) for fusesettings 
+* You MUST set the fuses correctly or else this won't work.
 * Sorry about the horrible source code, I had never used AVR assembly before this project
 
 ## Assembly and installation
