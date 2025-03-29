@@ -4,6 +4,8 @@ This project will disable the TMSS screen on a Sega Genesis. It was designed as 
 
 This method of disabling TMSS is nothing new. It has been tried before with success, but no working device or source code is in wide circulation for some reason. Given that the most common way of disabling TMSS involves cutting traces and logic gates (yours for only 15 quid!), we are long overdue for a more elegant solution.
 
+**ConsolesUnleashed has made a PCB version of this mod, see [here](https://github.com/consolesunleashed/sega-mega-drive-tmss-disable) for Gerbers and other stuff.**
+
 ## Stuff needed
 
 * Sega Genesis with TMSS
@@ -36,6 +38,9 @@ Installation is fairly straightforward:
 Optionally:
 * ATTiny pin 2 to the "FAIL" status LED
 * ATTiny pin 3 to the "SUCCESS" status LED
+
+**If you are using an Everdrive:** If hard reset is turned on in the Everdrive software, you will still see the TMSS screen before the game runs.
+To avoid this, tie the ATTiny's /RESET pin to /MRES (cart connector B2). The bypass should work fine without it.
 
 ## Compatibility
 
