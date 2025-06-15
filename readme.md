@@ -47,13 +47,11 @@ This should work with all TMSS consoles. TMSS is present on Genesis and Mega Dri
 ### Tested, confirmed working
 
 * 315-5487/5660-based consoles (tested: Model 2 VA3)
+* 315-5700/5708-based consoles (tested: Model 2 VA1).
 * Sega CD: Since the Sega CD only boots when no cartridge is inserted, this mod will not interfere with the Sega CD boot process. (Tested with Model 1 and Model 2 NA SCD)
 * 32X: Works as any plain Genesis cartridge.
 * Sega CD with Flashcarts. Since the mod takes itself off the bus once it's done, no interference is caused with flashcarts that do write to SCD.
 * Sega Power Base Converter/SMS compatibility mode: Works with Power Base converter and Everdrives in SMS mode. Since MRES is also being wired now, it will bypass TMSS once it gets out of SMS mode and into Genesis mode.
-
-### Tested working but has known issues:
-* 315-5700/5708-based consoles (tested: Model 2 VA1)  Some games work fine, but some others glitch out. Possibly needs adjustments in the timing loop.
 
 ### Untested, but probably working
 * Genesis on a Chip (GOAC) consoles, such as the VA4 Model 2 and all Model 3s.
