@@ -1,3 +1,9 @@
+# DEPRECATED/HISTORICAL PROJECT ONLY
+
+Further development [here](https://github.com/villahed94/sega-tmss-killer-attiny85-avrc).
+
+This code was thrown together in a weekend, and it's nice that it got picked up by the community, but it's old, and crappy, and outdated.
+
 # World's Worst Sega TMSS Disabler in an ATTinyX5
 
 This project will disable the TMSS screen on a Sega Genesis. It was designed as a stupid weekend project and is not really something you can use commercially, although it does work. It is meant to be easy to install, and easy to uninstall. No trace cuts are required.
