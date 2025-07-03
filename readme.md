@@ -47,6 +47,7 @@ This should work with all TMSS consoles. TMSS is present on Genesis and Mega Dri
 ### Tested, confirmed working
 * 315-5402/5433-based consoles (tested: Model 1 VA6).
 * 315-5487/5660-based consoles (tested: Model 2 VA3).
+* 315-5786/5685-based consoles w/Toshiba ASIC (tested: Model 2 VA2.3).
 * 315-5700/5708-based consoles (tested: Model 2 VA1).
 * 315-5960/6123 GOAC-based consoles (tested: Model 2 VA4).
 * Sega CD: Since the Sega CD only boots when no cartridge is inserted, this mod will not interfere with the Sega CD boot process. (Tested with Model 1 and Model 2 NA SCD)
