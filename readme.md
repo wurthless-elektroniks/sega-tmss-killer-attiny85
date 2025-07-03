@@ -45,16 +45,14 @@ To avoid this, tie the ATTiny's /RESET pin to /MRES (cart connector B2). The byp
 This should work with all TMSS consoles. TMSS is present on Genesis and Mega Drive systems from Model 1 hardware revision VA6 onwards. (All Model 2 and Model 3 systems have TMSS as standard.)
 
 ### Tested, confirmed working
-
-* 315-5487/5660-based consoles (tested: Model 2 VA3)
+* 315-5402/5433-based consoles (tested: Model 1 VA6).
+* 315-5487/5660-based consoles (tested: Model 2 VA3).
 * 315-5700/5708-based consoles (tested: Model 2 VA1).
+* 315-5960/6123 GOAC-based consoles (tested: Model 2 VA4).
 * Sega CD: Since the Sega CD only boots when no cartridge is inserted, this mod will not interfere with the Sega CD boot process. (Tested with Model 1 and Model 2 NA SCD)
 * 32X: Works as any plain Genesis cartridge.
 * Sega CD with Flashcarts. Since the mod takes itself off the bus once it's done, no interference is caused with flashcarts that do write to SCD.
 * Sega Power Base Converter/SMS compatibility mode: Works with Power Base converter and Everdrives in SMS mode. Since MRES is also being wired now, it will bypass TMSS once it gets out of SMS mode and into Genesis mode.
-
-### Untested, but probably working
-* Genesis on a Chip (GOAC) consoles, such as the VA4 Model 2 and all Model 3s.
   
 ## How TMSS works
 
